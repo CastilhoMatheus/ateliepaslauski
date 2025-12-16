@@ -1,9 +1,7 @@
-"use client";
-
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { Artwork } from "@/lib/data";
+import { CldImage } from "next-cloudinary";
 
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -24,64 +22,61 @@ export function ArtworkCard({
   return (
     <article className="flex h-full flex-col gap-3 rounded-xl border border-slate-200/80 bg-white/80 p-3 shadow-[0_12px_30px_rgba(20,30,55,0.12)] transition hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(20,30,55,0.18)]">
       <div className="relative overflow-hidden rounded-lg border border-slate-100/90">
-        <div
-          className="absolute inset-0 opacity-80 mix-blend-overlay"
-          style={{
-            background: `radial-gradient(circle at 22% 18%, ${artwork.accent}22, transparent 38%)`,
-          }}
-        />
-        <Image
+        <CldImage
           src={artwork.image}
           alt={artwork.title}
           width={500}
           height={360}
           className="h-48 w-full object-cover transition duration-700"
         />
-        <div className="absolute left-3 top-3 flex gap-2">
-          <Badge
-            variant={artwork.tag === "Original" ? "neutral" : "outline"}
-            className="normal-case tracking-tight"
-          >
-            {artwork.tag}
-          </Badge>
-          <Badge variant="contrast" className="normal-case">
-            {artwork.series}
+        <div className="absolute left-3 top-3">
+          <Badge variant="neutral" className="normal-case tracking-tight">
+            {artwork.style}
           </Badge>
         </div>
+        {!artwork.available && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+            <span className="rounded-md bg-white px-3 py-1 text-sm font-semibold text-slate-900">
+              Sold
+            </span>
+          </div>
+        )}
       </div>
       <div className="flex flex-col gap-1">
         <div className="flex items-start justify-between gap-2">
-          <div className="space-y-1">
-            <h3 className="text-lg font-semibold text-slate-900">
-              {artwork.title}
-            </h3>
-            <p className="text-sm text-slate-600">{artwork.description}</p>
-          </div>
+          <h3 className="text-lg font-semibold text-slate-900">
+            {artwork.title}
+          </h3>
           <span className="rounded-md bg-slate-900 px-3 py-1 text-sm font-semibold text-lime-50">
             {currency.format(artwork.price)}
           </span>
         </div>
-        <p className="text-xs text-slate-500">{artwork.medium}</p>
       </div>
       <div className="mt-auto flex items-center justify-between gap-3">
         <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-semibold text-slate-600">
           {artwork.size}
         </span>
-        {quantity > 0 ? (
-          <div className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-1 shadow-sm">
-            <IconButton ariaLabel="Remove one" onClick={onRemove}>
-              −
-            </IconButton>
-            <span className="text-sm font-semibold text-slate-900">
-              {quantity}
-            </span>
-            <IconButton ariaLabel="Add one" onClick={onAdd}>
-              +
-            </IconButton>
-          </div>
+        {artwork.available ? (
+          quantity > 0 ? (
+            <div className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-1 shadow-sm">
+              <IconButton ariaLabel="Remove one" onClick={onRemove}>
+                −
+              </IconButton>
+              <span className="text-sm font-semibold text-slate-900">
+                {quantity}
+              </span>
+              <IconButton ariaLabel="Add one" onClick={onAdd}>
+                +
+              </IconButton>
+            </div>
+          ) : (
+            <Button size="sm" onClick={onAdd}>
+              Add
+            </Button>
+          )
         ) : (
-          <Button size="sm" onClick={onAdd}>
-            Add
+          <Button size="sm" disabled>
+            Sold Out
           </Button>
         )}
       </div>
