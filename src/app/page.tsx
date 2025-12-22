@@ -1,18 +1,14 @@
 "use client";
-
-import { useMemo, useState } from "react";
+import Link from "next/link";
 import { CldImage } from "next-cloudinary";
+import { useMemo, useState } from "react";
 import { CartPanel } from "@/components/cart/cart-panel";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { PRICES_DISABLED, Price } from "@/components/ui/price";
 import { type Artwork, artworks } from "@/lib/data";
 
 type CartEntry = { artId: string; quantity: number };
-
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
 
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
@@ -88,8 +84,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <SiteHeader
-        totalItems={totalItems}
-        onCartClick={() => setCartOpen(true)}
+        totalItems={PRICES_DISABLED ? 0 : totalItems}
+        onCartClick={PRICES_DISABLED ? undefined : () => setCartOpen(true)}
       />
 
       <main className="mx-auto max-w-7xl px-6 py-16">
@@ -125,75 +121,78 @@ export default function Home() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filteredArtworks.map((artwork) => (
             <article key={artwork.id} className="group">
-              <div className="relative mb-4 aspect-[4/5] overflow-hidden bg-neutral-100">
-                <CldImage
-                  src={artwork.image}
-                  alt={artwork.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                {!artwork.available && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                    <span className="rounded-md bg-white px-4 py-2 text-sm font-semibold text-neutral-900">
-                      Sold
-                    </span>
-                  </div>
-                )}
-              </div>
+              <Link href={`/artwork/${artwork.id}`}>
+                <div className="relative mb-4 aspect-[4/5] overflow-hidden bg-neutral-100">
+                  <CldImage
+                    src={artwork.image}
+                    alt={artwork.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  {!artwork.available && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                      <span className="rounded-md bg-white px-4 py-2 text-sm font-semibold text-neutral-900">
+                        Sold
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </Link>
               <div className="space-y-2">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h3 className="font-medium text-neutral-900">
-                      {artwork.title}
-                    </h3>
+                    <Link href={`/artwork/${artwork.id}`}>
+                      <h3 className="font-medium text-neutral-900 transition hover:text-neutral-600">
+                        {artwork.title}
+                      </h3>
+                    </Link>
                     <p className="text-sm text-neutral-500">{artwork.style}</p>
                   </div>
-                  <span className="text-sm font-medium text-neutral-900">
-                    {currency.format(artwork.price)}
-                  </span>
+                  <Price amount={artwork.price} variant="inline" />
                 </div>
                 <p className="text-xs text-neutral-500">{artwork.size}</p>
 
-                {artwork.available ? (
-                  cartMap[artwork.id] ? (
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => removeOne(artwork.id)}
-                        className="flex h-8 w-8 items-center justify-center border border-neutral-300 text-sm transition hover:bg-neutral-50"
-                      >
-                        −
-                      </button>
-                      <span className="text-sm font-medium">
-                        {cartMap[artwork.id]}
-                      </span>
+                {!PRICES_DISABLED &&
+                  (artwork.available ? (
+                    cartMap[artwork.id] ? (
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => removeOne(artwork.id)}
+                          className="flex h-8 w-8 items-center justify-center border border-neutral-300 text-sm transition hover:bg-neutral-50"
+                        >
+                          −
+                        </button>
+                        <span className="text-sm font-medium">
+                          {cartMap[artwork.id]}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => addToCart(artwork.id)}
+                          className="flex h-8 w-8 items-center justify-center border border-neutral-300 text-sm transition hover:bg-neutral-50"
+                        >
+                          +
+                        </button>
+                      </div>
+                    ) : (
                       <button
                         type="button"
                         onClick={() => addToCart(artwork.id)}
-                        className="flex h-8 w-8 items-center justify-center border border-neutral-300 text-sm transition hover:bg-neutral-50"
+                        className="w-full border border-neutral-900 px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-neutral-900 hover:text-white"
                       >
-                        +
+                        Add to Cart
                       </button>
-                    </div>
+                    )
                   ) : (
                     <button
                       type="button"
-                      onClick={() => addToCart(artwork.id)}
-                      className="w-full border border-neutral-900 px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-neutral-900 hover:text-white"
+                      disabled
+                      className="w-full border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-400"
                     >
-                      Add to Cart
+                      Sold Out
                     </button>
-                  )
-                ) : (
-                  <button
-                    type="button"
-                    disabled
-                    className="w-full border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-400"
-                  >
-                    Sold Out
-                  </button>
-                )}
+                  ))}
               </div>
             </article>
           ))}
@@ -203,16 +202,18 @@ export default function Home() {
       <SiteFooter />
 
       {/* Cart Panel */}
-      <CartPanel
-        items={cartItems}
-        totalItems={totalItems}
-        totalPrice={totalPrice}
-        isOpen={cartOpen}
-        onToggle={() => setCartOpen((prev) => !prev)}
-        onAdd={(id) => addToCart(id)}
-        onRemove={(id) => removeOne(id)}
-        onDelete={deleteFromCart}
-      />
+      {!PRICES_DISABLED && (
+        <CartPanel
+          items={cartItems}
+          totalItems={totalItems}
+          totalPrice={totalPrice}
+          isOpen={cartOpen}
+          onToggle={() => setCartOpen((prev) => !prev)}
+          onAdd={(id) => addToCart(id)}
+          onRemove={(id) => removeOne(id)}
+          onDelete={deleteFromCart}
+        />
+      )}
     </div>
   );
 }

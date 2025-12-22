@@ -1,9 +1,10 @@
+"use client";
 import Link from "next/link";
 
 const footerLinks = [
-  { label: "Collection", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Coleção", href: "/" },
+  { label: "Sobre", href: "/about" },
+  { label: "Contato", href: "/contact" },
 ];
 
 export function SiteFooter() {
@@ -15,7 +16,9 @@ export function SiteFooter() {
             <p className="font-[var(--font-display)] text-lg text-neutral-900">
               Ateliê Paslauski
             </p>
-            <p className="mt-1 text-sm text-neutral-500">Lisbon, Portugal</p>
+            <p className="mt-1 text-sm text-neutral-500">
+              Rio Negrinho, Brasil
+            </p>
           </div>
 
           <nav className="flex gap-6">
@@ -33,7 +36,8 @@ export function SiteFooter() {
 
         <div className="mt-8 border-t border-neutral-200 pt-8 text-center text-xs text-neutral-500">
           <p>
-            © {new Date().getFullYear()} Ateliê Paslauski. All rights reserved.
+            © {new Date().getFullYear()} Ateliê Paslauski. Todos os direitos
+            reservados.
           </p>
         </div>
       </div>

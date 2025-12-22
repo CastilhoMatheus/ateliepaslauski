@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 
 type Variant = "neutral" | "contrast" | "outline" | "amber";
@@ -27,7 +28,7 @@ export function Badge({
       className={cn(
         "inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em]",
         variants[variant],
-        className,
+        className
       )}
     >
       {children}

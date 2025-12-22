@@ -1,12 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { Price } from "@/components/ui/price";
 import type { Artwork } from "@/lib/data";
-
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
 
 export function CartPanel({
   items,
@@ -155,9 +151,10 @@ export function CartPanel({
                             +
                           </button>
                         </div>
-                        <span className="text-sm font-medium text-neutral-900">
-                          {currency.format(item.price * item.quantity)}
-                        </span>
+                        <Price
+                          amount={item.price * item.quantity}
+                          variant="inline"
+                        />
                       </div>
                     </div>
                   </li>
@@ -171,9 +168,11 @@ export function CartPanel({
             <div className="border-t border-neutral-200 px-6 py-6">
               <div className="mb-4 flex items-center justify-between text-sm">
                 <span className="text-neutral-600">Subtotal</span>
-                <span className="text-lg font-medium text-neutral-900">
-                  {currency.format(totalPrice)}
-                </span>
+                <Price
+                  amount={totalPrice}
+                  variant="inline"
+                  className="text-lg"
+                />
               </div>
               <p className="mb-4 text-xs text-neutral-500">
                 Shipping and taxes calculated at checkout

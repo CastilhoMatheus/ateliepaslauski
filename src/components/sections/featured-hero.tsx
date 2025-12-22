@@ -3,12 +3,8 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Price } from "@/components/ui/price";
 import type { Artwork } from "@/lib/data";
-
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
 
 export function FeaturedHero({
   artwork,
@@ -57,17 +53,16 @@ export function FeaturedHero({
             <Pill>Ships worldwide</Pill>
           </div>
           <div className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-slate-200/80 bg-white/80 p-4 shadow-inner shadow-lime-100/50">
-            <div className="space-y-1">
-              <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                Studio price
-              </p>
-              <p className="text-3xl font-semibold text-slate-900">
-                {currency.format(artwork.price)}
-              </p>
+            <Price
+              amount={artwork.price}
+              variant="large"
+              label="Studio price"
+            />
+            {!Price && (
               <p className="text-xs text-slate-500">
                 Reserve today · ships in 3 days
               </p>
-            </div>
+            )}
             <div className="flex items-center gap-2">
               <Button onClick={onAddToCart}>
                 {cartContains > 0 ? "Add another" : "Add to cart"}

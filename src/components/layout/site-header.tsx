@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Collection", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Coleção", href: "/" },
+  { label: "Sobre", href: "/about" },
+  { label: "Contato", href: "/contact" },
 ];
 
 export function SiteHeader({
