@@ -1,19 +1,40 @@
 "use client";
 import Link from "next/link";
 import { CldImage } from "next-cloudinary";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CartPanel } from "@/components/cart/cart-panel";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { PRICES_DISABLED, Price } from "@/components/ui/price";
-import { type Artwork, artworks } from "@/lib/data";
+import { type Artwork } from "@/lib/data";
 
 type CartEntry = { artId: string; quantity: number };
 
 export default function Home() {
+  const [artworks, setArtworks] = useState<Artwork[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [cart, setCart] = useState<CartEntry[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
+
+  useEffect(() => {
+    async function fetchArtworks() {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_SITE_URL}/api/artworks`,
+          { cache: "force-cache" } // or "no-store"
+        );
+        if (!res.ok) throw new Error("Failed to fetch artworks");
+        const data = await res.json();
+        setArtworks(data);
+      } catch (error) {
+        console.error("Error fetching artworks:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchArtworks();
+  }, []);
 
   const cartMap = useMemo(() => {
     return cart.reduce<Record<string, number>>((acc, item) => {
@@ -30,7 +51,7 @@ export default function Home() {
         return { ...art, quantity: entry.quantity };
       })
       .filter(Boolean) as (Artwork & { quantity: number })[];
-  }, [cart]);
+  }, [cart, artworks]);
 
   const totalItems = useMemo(
     () => cartItems.reduce((acc, item) => acc + item.quantity, 0),
@@ -74,12 +95,26 @@ export default function Home() {
   const filteredArtworks = useMemo(() => {
     if (activeFilter === "all") return artworks;
     return artworks.filter((art) => art.style === activeFilter);
-  }, [activeFilter]);
+  }, [activeFilter, artworks]);
 
   const availableStyles = useMemo(() => {
     const styles = new Set(artworks.map((art) => art.style));
     return ["all", ...Array.from(styles).sort()];
-  }, []);
+  }, [artworks]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <SiteHeader totalItems={0} onCartClick={undefined} />
+        <main className="mx-auto max-w-7xl px-6 py-16">
+          <div className="flex items-center justify-center py-20">
+            <p className="text-neutral-600">Loading artworks...</p>
+          </div>
+        </main>
+        <SiteFooter />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">

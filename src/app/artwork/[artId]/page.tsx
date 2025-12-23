@@ -7,19 +7,41 @@ import { Price } from "@/components/ui/price";
 import { artworks } from "@/lib/data";
 import ArtworkClient from "./ArtworkClient";
 
-export function generateStaticParams() {
-  return artworks.map((artwork) => ({
-    artId: artwork.id,
+export async function generateStaticParams() {
+  // We still need IDs to prebuild pages
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/artworks`, {
+    cache: "force-cache",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch artworks for static params");
+  }
+
+  const artworks: { id: string }[] = await res.json();
+
+  return artworks.map((art) => ({
+    artId: art.id,
   }));
+}
+
+async function getArtwork(artId: string) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/artworks/${artId}`,
+    {
+      cache: "force-cache",
+    }
+  );
+
+  if (!res.ok) return null;
+  return res.json();
 }
 
 export default async function ArtworkPage({
   params,
 }: {
-  params: Promise<{ artId: string }>;
+  params: { artId: string };
 }) {
-  const { artId } = await params;
-  const artwork = artworks.find((a) => a.id === artId);
+  const artwork = await getArtwork(params.artId);
 
   if (!artwork) {
     notFound();
