@@ -10,7 +10,7 @@ import type { Artwork } from "@/lib/data";
 
 export default function ArtworkClient({ artwork }: { artwork: Artwork }) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 to-white">
       <div className="container mx-auto px-4 py-8">
         {/* Back */}
         <div className="mb-6">
@@ -45,9 +45,7 @@ export default function ArtworkClient({ artwork }: { artwork: Artwork }) {
           <div className="flex flex-col gap-6">
             <Badge variant="neutral">{artwork.style}</Badge>
 
-            <h1 className="text-4xl font-[var(--font-display)]">
-              {artwork.title}
-            </h1>
+            <h1 className="text-4xl font-(--font-display)">{artwork.title}</h1>
 
             <Price amount={artwork.price} variant="large" label="Price" />
 
