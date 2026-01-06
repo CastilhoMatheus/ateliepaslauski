@@ -20,10 +20,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchArtworks() {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_SITE_URL}/api/artworks`,
-          { cache: "no-store" },
-        );
+        const res = await fetch("/api/artworks", { cache: "no-store" });
         if (!res.ok) throw new Error("Failed to fetch artworks");
         const data = await res.json();
         setArtworks(data);
