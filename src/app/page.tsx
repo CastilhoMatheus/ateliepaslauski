@@ -6,7 +6,7 @@ import { CartPanel } from "@/components/cart/cart-panel";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { PRICES_DISABLED, Price } from "@/components/ui/price";
-import { type Artwork } from "@/lib/data";
+import type { Artwork } from "@/lib/data";
 
 type CartEntry = { artId: string; quantity: number };
 
@@ -22,7 +22,7 @@ export default function Home() {
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_SITE_URL}/api/artworks`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
         if (!res.ok) throw new Error("Failed to fetch artworks");
         const data = await res.json();
@@ -55,12 +55,12 @@ export default function Home() {
 
   const totalItems = useMemo(
     () => cartItems.reduce((acc, item) => acc + item.quantity, 0),
-    [cartItems]
+    [cartItems],
   );
 
   const totalPrice = useMemo(
     () => cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0),
-    [cartItems]
+    [cartItems],
   );
 
   const addToCart = (artId: string) => {
@@ -68,7 +68,9 @@ export default function Home() {
       const exists = prev.find((item) => item.artId === artId);
       if (exists) {
         return prev.map((item) =>
-          item.artId === artId ? { ...item, quantity: item.quantity + 1 } : item
+          item.artId === artId
+            ? { ...item, quantity: item.quantity + 1 }
+            : item,
         );
       }
       return [...prev, { artId, quantity: 1 }];
@@ -82,9 +84,9 @@ export default function Home() {
         .map((item) =>
           item.artId === artId
             ? { ...item, quantity: Math.max(0, item.quantity - 1) }
-            : item
+            : item,
         )
-        .filter((item) => item.quantity > 0)
+        .filter((item) => item.quantity > 0),
     );
   };
 

@@ -57,7 +57,7 @@ export function Price({
     <span
       className={cn(
         "rounded-md bg-slate-900 px-3 py-1 text-sm font-semibold text-lime-50",
-        className
+        className,
       )}
     >
       {formattedPrice}

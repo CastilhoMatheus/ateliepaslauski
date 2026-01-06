@@ -35,7 +35,7 @@ export function buttonClasses({
     "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/80 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60",
     variantClasses[variant],
     sizeClasses[size],
-    className
+    className,
   );
 }
 
@@ -48,7 +48,7 @@ export interface ButtonProps
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     { className, variant = "default", size = "md", type = "button", ...props },
-    ref
+    ref,
   ) => (
     <button
       ref={ref}
@@ -56,7 +56,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className={buttonClasses({ variant, size, className })}
       {...props}
     />
-  )
+  ),
 );
 
 Button.displayName = "Button";

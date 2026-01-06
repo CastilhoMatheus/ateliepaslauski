@@ -62,9 +62,7 @@ async function fetchAllResources(): Promise<CloudinaryResource[]> {
 async function syncToDatabase(resources: CloudinaryResource[]) {
   // Filter to only images with context if flag is set
   const filtered = onlyWithContext
-    ? resources.filter(
-        (r) => r.context && Object.keys(r.context).length > 0
-      )
+    ? resources.filter((r) => r.context && Object.keys(r.context).length > 0)
     : resources;
 
   console.log(`Found ${resources.length} images in Cloudinary`);
@@ -74,7 +72,7 @@ async function syncToDatabase(resources: CloudinaryResource[]) {
   console.log("");
 
   for (const resource of filtered) {
-    const metadata = resource.metadata || {};
+    const _metadata = resource.metadata || {};
 
     if (isDryRun) {
       console.log(`📷 ${resource.public_id}`);

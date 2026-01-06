@@ -7,6 +7,7 @@ const globalForPrisma = globalThis as unknown as {
 export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
+    // biome-ignore lint/style/noNonNullAssertion: <we can manage ts later>
     accelerateUrl: process.env.PRISMA_ACCELERATE_URL!,
   });
 

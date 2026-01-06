@@ -23,7 +23,7 @@ async function getArtwork(artId: string) {
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/artworks/${artId}`,
     {
       cache: "force-cache",
-    }
+    },
   );
 
   if (!res.ok) return null;
