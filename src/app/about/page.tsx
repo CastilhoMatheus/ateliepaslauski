@@ -1,5 +1,6 @@
-import Image from "next/image";
+"use client";
 import Link from "next/link";
+import { CldImage } from "next-cloudinary";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 
@@ -12,9 +13,9 @@ export default function AboutPage() {
         {/* Artist Photo & Bio */}
         <div className="mb-20 grid gap-12 md:grid-cols-2 md:gap-16">
           <div className="relative aspect-3/4 overflow-hidden bg-neutral-100">
-            <Image
-              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80"
-              alt="Artist portrait"
+            <CldImage
+              src="profile"
+              alt="Inês Paslauski"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
