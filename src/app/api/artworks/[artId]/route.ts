@@ -3,10 +3,12 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(
   _: Request,
-  { params }: { params: { artId: string } }
+  { params }: { params: Promise<{ artId: string }> }
 ) {
+  const { artId } = await params;
+
   const artwork = await prisma.artwork.findUnique({
-    where: { id: params.artId },
+    where: { id: artId },
   });
 
   if (!artwork) {

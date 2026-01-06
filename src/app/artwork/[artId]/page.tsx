@@ -1,10 +1,4 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CldImage } from "next-cloudinary";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Price } from "@/components/ui/price";
-import { artworks } from "@/lib/data";
 import ArtworkClient from "./ArtworkClient";
 
 export async function generateStaticParams() {
@@ -39,9 +33,10 @@ async function getArtwork(artId: string) {
 export default async function ArtworkPage({
   params,
 }: {
-  params: { artId: string };
+  params: Promise<{ artId: string }>;
 }) {
-  const artwork = await getArtwork(params.artId);
+  const { artId } = await params;
+  const artwork = await getArtwork(artId);
 
   if (!artwork) {
     notFound();
