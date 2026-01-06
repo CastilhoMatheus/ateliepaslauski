@@ -11,7 +11,7 @@ export default function AboutPage() {
       <main className="mx-auto max-w-5xl px-6 py-16">
         {/* Artist Photo & Bio */}
         <div className="mb-20 grid gap-12 md:grid-cols-2 md:gap-16">
-          <div className="relative aspect-[3/4] overflow-hidden bg-neutral-100">
+          <div className="relative aspect-3/4 overflow-hidden bg-neutral-100">
             <Image
               src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80"
               alt="Artist portrait"
@@ -24,38 +24,35 @@ export default function AboutPage() {
           <div className="flex flex-col justify-center space-y-6">
             <div>
               <p className="mb-2 text-sm uppercase tracking-wider text-neutral-500">
-                About the Artist
+                Sobre a artista
               </p>
-              <h1 className="mb-6 font-[var(--font-display)] text-4xl tracking-tight text-neutral-900">
-                Ana Paslauski
+              <h1 className="mb-6 font-(--font-display) text-4xl tracking-tight text-neutral-900">
+                Inês Paslauski
               </h1>
             </div>
 
             <div className="space-y-4 text-neutral-600">
               <p>
-                Based in Lisbon, Ana Paslauski creates contemporary paintings
-                that explore the interplay between light, texture, and form. Her
-                work captures fleeting moments of stillness and motion through
-                layered compositions.
+                Natural do interior do Paraná, na cidade de Cascavel, Inês
+                Paslauski é artista plástica cuja obra nasce do encontro entre
+                memória, sensibilidade e a força expressiva das cores. Desde
+                cedo, desenvolveu um olhar atento às misturas cromáticas e às
+                sutilezas da luz, construindo de forma intuitiva sua relação com
+                a pintura, muito antes de ter acesso a oportunidades formais de
+                estudo.
               </p>
 
               <p>
-                Working primarily with oil, ink, and mineral pigments, Ana's
-                process is deeply intuitive. Each piece begins with gestural
-                marks that evolve through careful layering, allowing the canvas
-                to breathe beneath translucent glazes.
-              </p>
-
-              <p>
-                Her Atlantic Nocturnes series draws inspiration from coastal
-                light patterns, while her recent Structures collection
-                investigates architectural forms through warm, earthy palettes.
-              </p>
-
-              <p>
-                Ana holds an MFA from the Royal College of Art, London. Her work
-                has been exhibited in galleries across Europe and is held in
-                private collections worldwide.
+                Sua trajetória profissional teve início em 1998, com a
+                participação em sua primeira exposição coletiva. Em seguida,
+                realizou exposições individuais que consolidaram sua linguagem
+                artística. Em 2000, apresentou uma exposição solo no Banco do
+                Brasil, na cidade de Aripuanã, Mato Grosso — um marco importante
+                que ampliou sua visibilidade no cenário artístico. Em 2003,
+                participou de sua primeira exposição internacional, abrindo sua
+                produção ao diálogo com outros países e públicos, experiência
+                que se estendeu a diversas outras mostras nacionais e
+                internacionais ao longo dos anos.
               </p>
             </div>
           </div>
@@ -63,46 +60,35 @@ export default function AboutPage() {
 
         {/* Studio & Process */}
         <div className="mb-20 border-t border-neutral-200 pt-16">
-          <h2 className="mb-8 font-[var(--font-display)] text-3xl tracking-tight text-neutral-900">
-            Studio & Process
+          <h2 className="mb-8 font-(--font-display) text-3xl tracking-tight text-neutral-900">
+            Ateliê & Processo
           </h2>
 
           <div className="grid gap-12 md:grid-cols-2">
             <div className="space-y-4 text-neutral-600">
-              <h3 className="text-lg font-medium text-neutral-900">
-                The Studio
-              </h3>
+              <h3 className="text-lg font-medium text-neutral-900">O Ateliê</h3>
               <p>
-                The Lisbon studio overlooks a quiet courtyard in Alfama, where
-                natural light filters through large north-facing windows. This
-                consistent, diffused light is essential to Ana's process,
-                allowing her to work with subtle tonal shifts and delicate
-                glazing techniques.
-              </p>
-
-              <p>
-                The space is intentionally minimal—white walls, concrete floors,
-                and organized materials create an environment where the work can
-                speak without distraction.
+                Atualmente, mantém seu próprio ateliê, onde desenvolve uma
+                produção autoral influenciada pelo impressionismo contemporâneo.
+                Suas pinturas não buscam a representação literal da paisagem,
+                mas sim registrar impressões sensíveis dos lugares que visita.
+                Paisagens, atmosferas e fragmentos de memória se fundem às
+                vivências da artista, resultando em obras carregadas de
+                movimento, luz e emoção.
               </p>
             </div>
 
             <div className="space-y-4 text-neutral-600">
               <h3 className="text-lg font-medium text-neutral-900">
-                The Process
+                O Processo
               </h3>
               <p>
-                Each painting begins with loose gestural marks in charcoal or
-                ink, mapping out compositional rhythms. Oil paint is then
-                applied in thin, translucent layers, building depth gradually
-                over weeks or months.
-              </p>
-
-              <p>
-                Ana uses a limited palette of earth tones, indigos, and neutral
-                grays, mixing custom colors from mineral pigments. The slow
-                drying time of oil allows for subtle blending and reworking,
-                creating atmospheric depth.
+                Cada pintura de Inês Paslauski é concebida como uma experiência
+                contemplativa. Suas obras convidam o observador a uma pausa, a
+                um encontro silencioso com o tempo e com a memória. São
+                trabalhos que dialogam com espaços sofisticados e coleções que
+                valorizam autenticidade, profundidade poética e uma narrativa
+                visual atemporal.
               </p>
             </div>
           </div>
@@ -110,18 +96,18 @@ export default function AboutPage() {
 
         {/* Studio Visit CTA */}
         <div className="border-t border-neutral-200 pt-16 text-center">
-          <h2 className="mb-4 font-[var(--font-display)] text-2xl tracking-tight text-neutral-900">
-            Visit the Studio
+          <h2 className="mb-4 font-(--font-display) text-2xl tracking-tight text-neutral-900">
+            Visite o ateliê
           </h2>
           <p className="mb-8 text-neutral-600">
-            Studio visits are available by appointment. View works in person and
-            discuss commissions or specific pieces.
+            Visitas ao ateliê estão disponíveis mediante agendamento. Veja as
+            obras pessoalmente e discuta encomendas ou peças específicas.
           </p>
           <Link
             href="/contact"
             className="inline-block border border-neutral-900 px-8 py-3 text-sm font-medium text-neutral-900 transition hover:bg-neutral-900 hover:text-white"
           >
-            Get in Touch
+            Entre em Contato
           </Link>
         </div>
       </main>

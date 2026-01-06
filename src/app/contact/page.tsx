@@ -9,11 +9,11 @@ export default function ContactPage() {
 
       <main className="mx-auto max-w-4xl px-6 py-16">
         <div className="mb-16 text-center">
-          <h1 className="mb-4 font-[var(--font-display)] text-5xl tracking-tight text-neutral-900">
-            Get in Touch
+          <h1 className="mb-4 font-(--font-display) text-5xl tracking-tight text-neutral-900">
+            Entre em Contato
           </h1>
           <p className="text-lg text-neutral-600">
-            Inquiries about available works, commissions, and studio visits
+            Informações sobre obras disponíveis, encomendas e visitas ao ateliê
           </p>
         </div>
 
@@ -34,37 +34,37 @@ export default function ContactPage() {
 
             <div>
               <h2 className="mb-4 text-sm uppercase tracking-wider text-neutral-500">
-                Phone
+                Telefone
               </h2>
               <a
                 href="tel:+351000000000"
                 className="text-lg text-neutral-900 hover:text-neutral-600"
               >
-                +351 000 000 000
+                +55 (47) 99204-5663
               </a>
             </div>
 
             <div>
               <h2 className="mb-4 text-sm uppercase tracking-wider text-neutral-500">
-                Studio Location
+                Local do Ateliê
               </h2>
               <p className="text-lg text-neutral-900">
-                Lisbon, Portugal
+                Rio Negrinho, SC, Brasil
                 <br />
                 <span className="text-base text-neutral-600">
-                  Visits by appointment only
+                  Visitas somente com agendamento prévio
                 </span>
               </p>
             </div>
 
             <div>
               <h2 className="mb-4 text-sm uppercase tracking-wider text-neutral-500">
-                Hours
+                Horários
               </h2>
               <p className="text-neutral-900">
-                Tuesday – Saturday
+                Segunda – Sexta
                 <br />
-                10:00 – 18:00
+                09:00 – 18:00
               </p>
             </div>
           </div>
@@ -72,7 +72,7 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div>
             <h2 className="mb-6 text-sm uppercase tracking-wider text-neutral-500">
-              Send a Message
+              Entre em contato
             </h2>
             <form className="space-y-4">
               <div>
@@ -80,7 +80,7 @@ export default function ContactPage() {
                   htmlFor="name"
                   className="mb-2 block text-sm text-neutral-700"
                 >
-                  Name
+                  Nome
                 </label>
                 <input
                   type="text"
@@ -110,7 +110,7 @@ export default function ContactPage() {
                   htmlFor="subject"
                   className="mb-2 block text-sm text-neutral-700"
                 >
-                  Subject
+                  Assunto
                 </label>
                 <input
                   type="text"
@@ -125,7 +125,7 @@ export default function ContactPage() {
                   htmlFor="message"
                   className="mb-2 block text-sm text-neutral-700"
                 >
-                  Message
+                  Mensagem
                 </label>
                 <textarea
                   id="message"
@@ -139,7 +139,7 @@ export default function ContactPage() {
                 type="submit"
                 className="w-full border border-neutral-900 px-8 py-3 text-sm font-medium text-neutral-900 transition hover:bg-neutral-900 hover:text-white"
               >
-                Send Message
+                Enviar Mensagem
               </button>
             </form>
           </div>
@@ -147,32 +147,31 @@ export default function ContactPage() {
 
         {/* Additional Info */}
         <div className="border-t border-neutral-200 pt-16">
-          <h2 className="mb-6 text-center font-[var(--font-display)] text-2xl tracking-tight text-neutral-900">
-            Before You Reach Out
+          <h2 className="mb-6 text-center font-(--font-display) text-2xl tracking-tight text-neutral-900">
+            Antes de entrar em contato
           </h2>
           <div className="mx-auto max-w-2xl space-y-4 text-neutral-600">
             <p>
-              To help us respond quickly and accurately to your inquiry, please
-              include:
+              Para que possamos responder à sua solicitação com rapidez e
+              precisão, inclua as seguintes informações:
             </p>
             <ul className="space-y-2 pl-6">
               <li className="list-disc">
-                Which pieces you're interested in or the type of work you're
-                looking for
+                Quais peças lhe interessam ou o tipo de obra que procura
               </li>
               <li className="list-disc">
-                Your budget range and preferred dimensions
+                Seu orçamento e dimensões preferidas
               </li>
               <li className="list-disc">
-                Your location for shipping estimates
+                Sua localização para que possamos calcular o frete
               </li>
               <li className="list-disc">
-                Any framing preferences or special requirements
+                Quaisquer preferências de moldura ou requisitos especiais
               </li>
             </ul>
             <p className="pt-4">
-              We typically respond within 24-48 hours. For urgent inquiries,
-              please call the studio directly.
+              Normalmente, respondemos em 24 a 48 horas. Para solicitações
+              urgentes, entre em contato diretamente com o estúdio.
             </p>
           </div>
         </div>
@@ -182,7 +181,7 @@ export default function ContactPage() {
             href="/"
             className="inline-block text-sm text-neutral-600 hover:text-neutral-900"
           >
-            ← Back to Collection
+            ← Voltar a Coleção
           </Link>
         </div>
       </main>
